@@ -1,29 +1,38 @@
 source 'https://rubygems.org'
 
-# PostgreSQL driver
-gem 'pg'
+gem 'rake'
 
 # Sinatra driver
 gem 'sinatra'
 gem 'sinatra-contrib'
+gem 'sinatra-partial'
 
-gem 'activesupport'
-gem 'activerecord'
-gem 'bcrypt-ruby'
+# Use Thin as web server
+gem 'thin'
 
-gem 'rake'
-
+# Detect changes and automatically reload web server
 gem 'shotgun'
 
+# Use PostgreSQL database
+gem 'pg'
+
+# Use ActiveRecord object relational map
+gem 'activerecord'
+gem 'activesupport'
+
+# Includes ActiveModel has_secure_password
+gem 'bcrypt', '~> 3.1.7'
+
+
 group :test do
-  gem 'database_cleaner', '~> 1.4.1'
   gem 'shoulda-matchers'
   gem 'rack-test'
   gem 'rspec'
-  gem 'capybara'
 end
 
-group :test, :development do
-  gem 'factory_girl'
+group :development, :test do
   gem 'faker'
+  gem 'factory_girl'
+  gem 'tux'
+  gem 'pry'
 end

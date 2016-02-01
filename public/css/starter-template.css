@@ -6,4 +6,6 @@ body {
   text-align: center;
 }
 
-.form-horizontal
+li {
+  list-style-type: none;
+}
