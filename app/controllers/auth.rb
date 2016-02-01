@@ -1,21 +1,9 @@
 get '/' do
   if request.xhr?
-    erb :welcome, layout: false
+    erb :index, layout: false
   else
-    erb :welcome
+    erb :index
   end
-end
-
-get '/login' do
-  if request.xhr?
-    erb :login, layout: false
-  else
-    erb :login
-  end
-end
-
-get '/signup' do
-  erb :signup
 end
 
 get '/about' do
@@ -34,3 +22,10 @@ get '/contact' do
   end
 end
 
+get '/inbox' do
+  if request.xhr?
+    erb :"/users/inbox", layout: false
+  else
+    erb :"/users/inbox"
+  end
+end

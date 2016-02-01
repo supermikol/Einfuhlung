@@ -1,0 +1,25 @@
+
+
+<h4>Have you ever listened to the earth breathe?</h4>
+
+  <% if @errors %>
+    <ul>
+      <% @errors.each do |error| %>
+       <li> <%= error %> </li>
+       <% end %>
+    </ul>
+  <% end %>
+
+<form class="form-horizontal" method="POST" action="/messages">
+
+  <div class="form-group">
+
+    <textarea class="form-control" name="text" rows="3"></textarea>
+  </div>
+
+  <div class="form-group">
+  <button type="submit" class="btn btn-default">Share</button>
+  </div>
+
+</form>
+

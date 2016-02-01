@@ -1,0 +1,30 @@
+<!-- Main component for a primary marketing message or call to action -->
+
+
+<div class="jumbotron">
+  <% if current_user %>
+  <h2>Welcome <%= current_user.first_name %>!</h2>
+
+  <a class="btn btn-lg btn-primary" href="/messages/new" role="button">Write Post</a>
+
+
+  <% else %>
+  <h2>Strangers helping strangers</h2>
+  <p>The concept of empathy comes from the German word Einfühlung (pronounced eín-fhoo-loong), which means “in-feeling” or “feeling into”.</p>
+  <p>
+    <a class="btn btn-lg btn-primary" href="/sessions/new" role="button">Login</a>
+    <a class="btn btn-lg btn-primary" href="/users/new" role="button">Sign Up &raquo;</a>
+  </p>
+  <% end %>
+
+</div>
+
+<% if current_user %>
+  <ul>
+  <% Message.all.each do |message| %>
+    <%if message.parent_id.nil? %>
+      <li><a href="/messages/<%= message.id %>"><%= message.message %></a></li>
+    <% end %>
+  <% end %>
+  </ul>
+<% end %>

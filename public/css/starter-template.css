@@ -6,10 +6,6 @@ body {
   text-align: center;
 }
 
-.form-group {
-  width: 35em;
+li {
+  list-style-type: none;
 }
-/*
-.form-group input {
-  width:25em;
-}*/

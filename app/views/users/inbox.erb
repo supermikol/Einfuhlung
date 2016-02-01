@@ -1,0 +1,10 @@
+<% current_user.received_messages.each do |message| %>
+
+<p>Sent Message: <%= message.parent_message.message %></p>
+<p>Response From <%= message.sender.first_name %>: <%= message.message %></p>
+
+<% end %>
+
+<% if current_user.received_messages.length == 0 %>
+Your inbox is empty!
+<% end %>
