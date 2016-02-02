@@ -5,6 +5,7 @@ class CreateMessages < ActiveRecord::Migration
       t.references :parent, index: true
       t.references :sender, index: true
       t.text :message
+      t.boolean :head, null: false, default: false
       t.timestamps
     end
   end
