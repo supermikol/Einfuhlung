@@ -5,6 +5,67 @@
 
 <% end %>
 
-<% if current_user.received_messages.length == 0 %>
-Your inbox is empty!
-<% end %>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="conversation-wrap col-lg-3">
+
+          <% if current_user.received_messages.length == 0 %>
+            <div class="media conversation">
+
+                <div class="media-body">
+
+                    <small>Your inbox is empty! Reach to more folks!</small>
+                </div>
+            </div>
+          <% end %>
+
+
+          <% current_user.received_messages.each do |message| %>
+            <div class="media conversation">
+                <a class="pull-left" href="#">
+                    <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="">
+                </a>
+                <div class="media-body">
+                    <h5 class="media-heading"><%= message.sender.first_name %></h5>
+                    <small><%= message.message %></small>
+                </div>
+            </div>
+          <% end %>
+
+        </div>
+
+
+        <div class="message-wrap col-lg-8">
+            <div class="msg-wrap">
+
+              <% @threads.each do |message| %>
+
+                <div class="media msg ">
+                    <a class="pull-left" href="#">
+                        <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 32px; height: 32px;" src="">
+                    </a>
+                    <div class="media-body">
+                        <small class="pull-right time"><i class="fa fa-clock-o"></i> <%= message.created_at %></small>
+                        <h5 class="media-heading"><%= message.sender.first_name %> <%= message.sender.last_name %></h5>
+                        <small class="col-lg-10"><%= message.message %></small>
+                    </div>
+                </div>
+
+            <div class="send-wrap ">
+
+                <textarea class="form-control send-message" rows="3" placeholder="Write a reply..."></textarea>
+
+            </div>
+            <div class="btn-panel">
+                <a href="" class=" col-lg-4 text-right btn   send-message-btn pull-right" role="button"> Send Message</a>
+            </div>
+              <% end %>
+
+            </div>
+
+        </div>
+    </div>
+</div>

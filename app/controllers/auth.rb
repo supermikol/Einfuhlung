@@ -23,6 +23,19 @@ get '/contact' do
 end
 
 get '/inbox' do
+  @threads = Array.new
+  @user = User.find(session[:user_id])
+  @user.received_messages.each do |message|
+  if message.children_messages.length == 0
+    thread = [message]
+    while message.parent_message
+      message = message.parent_message
+      thread << message
+    end
+    @threads << thread
+  end
+ end
+
   if request.xhr?
     erb :"/users/inbox", layout: false
   else
