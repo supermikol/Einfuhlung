@@ -3,7 +3,10 @@ get '/messages/new' do
 end
 
 post '/messages' do
-  @message = Message.new(message: params[:text], sender_id: session[:user_id])
+  @message = Message.new(
+    message: params[:text],
+    sender_id: session[:user_id],
+    head: true)
   if @message.save
     redirect "/messages/#{@message.id}"
   else
@@ -26,7 +29,8 @@ end
 
 post '/messages/:id' do
   @message = Message.find(params[:id])
-  @new_message = Message.new(message: params[:text], parent_id: params[:id], sender_id: session[:user_id])
+  @new_message = Message.new(message: params[:text], parent_id: params[:id], sender_id: session[:user_id],
+    head: true)
 
   if @new_message.save
     redirect "/messages/#{params[:id]}"
@@ -34,7 +38,19 @@ post '/messages/:id' do
     @errors = @new_message.errors.full_messages
     erb :"/messages/reply"
   end
-  erb :"/messages/show"
+
+end
+
+post '/messages/private/:id' do
+  @new_message = Message.new(message: params[:text], parent_id: params[:id], sender_id: session[:user_id])
+
+  if @new_message.save
+    redirect "/inbox"
+  else
+    @errors = @new_message.errors.full_messages
+    redirect "/inbox"
+  end
+
 end
 
 delete '/messages/:id' do

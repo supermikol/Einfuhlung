@@ -124,6 +124,11 @@ namespace :db do
       system "rake db:migrate RACK_ENV=test"
     end
   end
+
+  desc "Reset database"
+  task :reset do
+    system "rake db:drop && rake db:create && rake db:migrate"
+  end
 end
 
 desc 'Start IRB with application environment loaded'
