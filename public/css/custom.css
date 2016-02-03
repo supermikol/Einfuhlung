@@ -184,9 +184,7 @@ body::-webkit-scrollbar {
 }
 
 
+.jumbotron {
+  background: light grey;
 
-
-/*index rows*/
-.index-row {
-  border-bottom: 1px solid black;
 }

@@ -12,6 +12,7 @@ $(document).ready(function() {
       url: link
     }).done(function(response){
       $('.starter-template').html(response);
+      inboxListener();
       $(event.target).parent().siblings().removeClass('active');
       $(event.target).parent().addClass('active');
 
@@ -19,16 +20,48 @@ $(document).ready(function() {
 
   });
 
-  $('#welcomeLogin').on('click','a',function(e){
-    debugger
+  // $('#welcomeLogin').on('click','a',function(e){
+  //   e.preventDefault();
+  //   link = $(this).attr('href');
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: link
+  //   }).done(function(response){
+  //     $('.starter-template').html(response);
+  //   });
+  // })
+
+
+
+});
+
+inboxListener =  function(){
+  $('.conversation-wrap').on('click', 'a', function(e){
     e.preventDefault();
     link = $(this).attr('href');
     $.ajax({
       method: 'GET',
       url: link
     }).done(function(response){
-      $('.starter-template').html(response);
-    });
+      $('#thread-wrap').html(response);
+      chatboxListener();
+    })
+  })
+}
+
+chatboxListener = function(){
+  $('form').on('submit', function(event){
+    event.preventDefault();
+    var link = $(this).attr('action');
+    var text_data = $(this).serialize();
+    $.ajax({
+      method: 'POST',
+      url: link,
+      data: text_data
+    }).done(function(response){
+      $('#thread-wrap').html(response);
+      chatboxListener();
+    })
   })
 
-});
+}

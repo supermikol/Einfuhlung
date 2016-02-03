@@ -2,16 +2,17 @@
 
 
 <div class="jumbotron">
-  <h2>What's your story this day?</h2>
   <% if current_user %>
-  <p>Welcome <%= current_user.first_name %>, glad to see you again.</p>
+  <h3>Welcome <%= current_user.first_name %>, glad to see you again.</h3>
+    <p>Have a story today?</p>
 
-  <a class="btn btn-lg btn-primary" href="/messages/new" role="button">Write Post</a>
+  <a class="btn btn-lg btn-primary" href="/messages/new" role="button">Share Post</a>
 
 
   <% else %>
 
-  <p>For the poet, the lover, and the fighter that lives inside us all, because sometimes they just need to be heard.</p>
+  <h3>For the fighter, the poet, and the romantic that lives inside us all, because they deserve to be heard.</h3>
+  <p>What's your story?</p>
   <p>
     <a class="btn btn-lg btn-primary" href="/sessions/new" role="button">Login</a>
     <a class="btn btn-lg btn-primary" href="/users/new" role="button">Sign Up &raquo;</a>
@@ -25,11 +26,10 @@
 <div class="row marketing">
   <div class="col-lg-8 col-lg-offset-2">
     <table class="table">
-      <tr> hello </tr>
       <% Message.all.each do |message| %>
         <%if message.parent_id.nil? %>
           <tr class="index-row">
-          <h4><a href="/messages/<%= message.id %>"><%= message.message %></a></h4>
+          <td><h4><a href="/messages/<%= message.id %>"><%= message.message.split(" ").length < 20 ? message.message : message.message.split(" ")[0..20].join(" ") + "..." %></a></h4></td>
           </tr>
         <% end %>
       <% end %>
