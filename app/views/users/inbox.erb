@@ -10,48 +10,21 @@
         </div>
       <% end %>
 
-
-      <% @threads.each do |thread| %>
+      <% @threads.each_with_index do |thread, thread_index| %>
       <% message = thread.last %>
-        <div class="media conversation">
-            <a class="pull-left" href="#">
+        <a class="media conversation thread-link" href="/messages/threads/<%= thread_index %>">
+            <div class="pull-left" >
                 <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="">
-            </a>
+            </div>
             <div class="media-body">
                 <h5 class="media-heading"><%= message.sender.first_name %> <%= message.sender.last_name %>, <%= message.parent_message.sender.first_name %> <%= message.parent_message.sender.last_name %></h5>
                 <small><%= message.message %></small>
             </div>
-        </div>
+        </a>
       <% end %>
     </div>
 
-    <div class="message-wrap col-lg-8">
-        <div class="msg-wrap">
-
-          <% @threads.each do |thread| %>
-            <% thread.each do |message| %>
-              <div class="media msg ">
-
-                  <div class="media-body" style="text-align: left">
-                      <small class="pull-right time"> <%= message.created_at %></small>
-                      <medium class="media-heading" style="text-align: left"><%= message.sender.first_name %></medium>
-                      <medium class="col-lg-10" style="text-align: left"><%= message.message %></medium>
-                  </div>
-              </div>
-            <% end %>
-        <div class = "row">
-        <form method="POST" action="/messages/private/<%= thread.last.id %>">
-          <div class="send-wrap ">
-              <textarea class="form-control send-message" name="text" rows="3" placeholder="Write a reply..."></textarea>
-              <div class="btn-panel">
-              <input type="submit" class="btn-panel col-lg-4 text-right btn   send-message-btn pull-right" role="button" value = "Send Message"> </input></div>
-          </div>
-        </form>
-      </div>
-
-        <% end %>
-
-        </div>
+    <div class="message-wrap col-lg-8" id="thread-wrap">
     </div>
   </div>
 </div>

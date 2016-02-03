@@ -3,7 +3,7 @@ require 'bcrypt'
 class User < ActiveRecord::Base
   include BCrypt
 
-  validates :first_name, :last_name, :email, presence: true
+  validates :first_name, :last_name, :email, :password, presence: true
   validates :email, uniqueness: true
   validates :password, confirmation: true
   validates :password_confirmation, presence: true
@@ -25,8 +25,7 @@ class User < ActiveRecord::Base
 
   def self.authenticate(user_info)
     user = User.find_by(email: user_info[:email])
-    puts user
-    # puts user_info[:password] == user.password
+        # puts user_info[:password] == user.password
     return user if user && user.password == user_info[:password]
   end
 
