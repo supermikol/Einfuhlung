@@ -44,6 +44,21 @@ post '/messages/:id' do
 end
 
 
+get '/messages/threads/:id/window' do
+  @thread_num = params[:id]
+  @threads = Array.new
+  all_heads = User.find(session[:user_id]).head_messages
+
+  #stores entire threads of every head message intos @threads
+  all_heads.each do |message|
+    @threads += message.return_threads
+  end
+
+  # thread = @threads[@thread_num.to_i]
+  erb :"/users/_msg", layout: false, locals: {thread: @threads[@thread_num.to_i]}
+end
+
+
 get '/messages/threads/:id' do
   @thread_num = params[:id]
 

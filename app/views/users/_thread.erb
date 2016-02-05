@@ -1,16 +1,11 @@
 <div class="msg-wrap">
-  <% p @threads[@thread_num.to_i] %>
 
   <% thread = @threads[@thread_num.to_i] %>
-    <% thread.each do |message| %>
-      <div class="media msg ">
-          <div class="media-body" style="text-align: left">
-              <small class="pull-right time"> <%= message.created_at %></small>
-              <medium class="media-heading" style="text-align: left"><%= message.sender.first_name %></medium>
-              <medium class="col-lg-10" style="text-align: left"><%= message.message %></medium>
-          </div>
-      </div>
-    <% end %>
+
+  <div class="msg-box">
+    <%= erb :"/users/_msg", layout: false, locals: {thread: thread} %>
+  </div>
+
     <div class = "row">
       <form method="POST" action="/messages/private/<%= thread.last.id %>">
         <div class="send-wrap ">

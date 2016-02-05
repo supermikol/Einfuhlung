@@ -11,20 +11,21 @@
       <% end %>
 
       <% @threads.each_with_index do |thread, thread_index| %>
-      <% message = thread.last %>
+      <% message = thread.first %>
         <a class="media conversation thread-link" href="/messages/threads/<%= thread_index %>">
             <div class="pull-left" >
                 <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="">
             </div>
             <div class="media-body">
-                <h5 class="media-heading"><%= message.sender.first_name %> <%= message.sender.last_name %>, <%= message.parent_message.sender.first_name %> <%= message.parent_message.sender.last_name %></h5>
-                <small><%= message.message %></small>
+                <h5 class="media-heading"><%= message.sender.first_name %> <%= message.sender.last_name %>, <%= message.children_messages[0].sender.first_name %> <%= message.children_messages[0].sender.last_name %></h5>
+                <small><%= thread.last.message %></small>
             </div>
         </a>
       <% end %>
     </div>
 
     <div class="message-wrap col-lg-8" id="thread-wrap">
+      <h4>Click on a message on the left to continue your conversation!</h4>
     </div>
   </div>
 </div>

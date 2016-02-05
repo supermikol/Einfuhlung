@@ -1,0 +1,9 @@
+    <% thread.each do |message| %>
+      <div class="media msg ">
+          <div class="media-body" style="text-align: left">
+              <small class="pull-right time"> <%= message.created_at %></small>
+              <medium class="media-heading" style="text-align: left"><%= message.sender.first_name %></medium>
+              <medium class="col-lg-10" style="text-align: left"><%= message.message %></medium>
+          </div>
+      </div>
+    <% end %>
