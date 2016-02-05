@@ -29,4 +29,11 @@ class User < ActiveRecord::Base
     return user if user && user.password == user_info[:password]
   end
 
+  #returns array with head messages
+  def head_messages
+    self.sent_messages.select {|message| message.head == true}
+  end
+
+
+
 end

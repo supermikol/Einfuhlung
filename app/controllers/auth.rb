@@ -23,29 +23,14 @@ get '/contact' do
 end
 
 get '/inbox' do
-  @threads = Array.new
   user = User.find(session[:user_id])
-  all_heads = user.sent_messages.select {|message| message.head == true}
+
+  @threads = Array.new
+  all_heads = User.find(session[:user_id]).head_messages
+
+  #stores entire threads of every head message intos @threads
   all_heads.each do |message|
-    if message.parent_message
-      thread = [message.parent_message, message]
-      temp_message = message
-      until temp_message.children_messages.length == 0
-        temp_message = temp_message.children_messages[0]
-        thread <<  temp_message
-      end
-      @threads << thread
-    else
-      message.children_messages.each do |message|
-        thread = [message.parent_message, message]
-        temp_message = message
-        until temp_message.children_messages.length == 0
-          temp_message = temp_message.children_messages[0]
-          thread <<  temp_message
-        end
-        @threads << thread
-      end
-    end
+    @threads += message.return_threads
   end
 
   if request.xhr?
