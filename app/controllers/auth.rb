@@ -1,5 +1,5 @@
 get '/' do
-  @sorted_messages = Message.all.sort_by{|x| x.created_at}.reverse
+  @sorted_messages = Message.all.select{|x| x.hidden == false}.sort_by{|x| x.created_at}.reverse
   if request.xhr?
     erb :index, layout: false
   else
