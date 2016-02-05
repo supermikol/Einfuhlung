@@ -31,14 +31,17 @@ end
 #Post first reply to post
 post '/messages/:id' do
   @message = Message.find(params[:id])
-  @new_message = Message.new(message: params[:text], parent_id: params[:id], sender_id: session[:user_id],
+  if @message.hidden == false
+    @new_message = Message.new(message: params[:text], parent_id: params[:id], sender_id: session[:user_id],
     head: true)
-
-  if @new_message.save
-    redirect "/messages/#{params[:id]}"
+    if @new_message.save
+      redirect "/messages/#{params[:id]}"
+    else
+      @errors = @new_message.errors.full_messages
+      erb :"/messages/reply"
+    end
   else
-    @errors = @new_message.errors.full_messages
-    erb :"/messages/reply"
+    redirect '/'
   end
 
 end
@@ -91,7 +94,11 @@ post '/messages/private/:id' do
 
 end
 
-delete '/messages/:id' do
-  Message.delete(params[:id])
+put '/messages/:id/delete' do
+  message = Message.find(params[:id])
+  if message.sender_id == session[:user_id]
+    message.hidden = true
+    message.save
+  end
   redirect '/'
 end
