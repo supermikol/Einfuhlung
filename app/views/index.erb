@@ -26,10 +26,11 @@
 <div class="row marketing">
   <div class="col-lg-8 col-lg-offset-2">
     <table class="table">
-      <% Message.all.each do |message| %>
+      <% @sorted_messages.each do |message| %>
         <%if message.parent_id.nil? %>
           <tr class="index-row">
           <td><h4><a href="/messages/<%= message.id %>"><%= message.message.split(" ").length < 20 ? message.message : message.message.split(" ")[0..20].join(" ") + "..." %></a></h4></td>
+          <td><h4><a href="/messages/<%= message.id %>"><%= message.time_ago_in_words %></a></h4></td>
           </tr>
         <% end %>
       <% end %>

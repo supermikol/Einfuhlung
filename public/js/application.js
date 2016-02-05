@@ -20,32 +20,34 @@ $(document).ready(function() {
 
   });
 
-  // $('#welcomeLogin').on('click','a',function(e){
-  //   e.preventDefault();
-  //   link = $(this).attr('href');
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: link
-  //   }).done(function(response){
-  //     $('.starter-template').html(response);
-  //   });
-  // })
-
-
-
 });
 
 inboxListener =  function(){
   $('.conversation-wrap').on('click', 'a', function(e){
     e.preventDefault();
-    link = $(this).attr('href');
+    var link = $(this).attr('href');
     $.ajax({
       method: 'GET',
       url: link
     }).done(function(response){
       $('#thread-wrap').html(response);
       chatboxListener();
+
+
+        //Trying to get it to refresh the chatbox so that new messages will update regularly. However, currently very buggy
+      // setInterval(function(){
+      //   $.ajax({
+      //     method: 'GET',
+      //     url: link + "/window"
+      //   })
+      //   .done(function(response){
+      //     $('.msg-box').html(response);
+      //   chatboxListener();
+      //   });
+      // }, 3000);
+
     })
+
   })
 }
 
@@ -62,6 +64,7 @@ chatboxListener = function(){
       $('#thread-wrap').html(response);
       chatboxListener();
     })
+
   })
 
 }
