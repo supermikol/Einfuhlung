@@ -94,7 +94,7 @@ post '/messages/private/:id' do
 
 end
 
-put '/messages/:id/delete' do
+post '/messages/:id/delete' do
   message = Message.find(params[:id])
   if message.sender_id == session[:user_id]
     message.hidden = true

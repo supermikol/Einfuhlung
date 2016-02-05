@@ -4,7 +4,6 @@
 
 <% if @message.sender_id == current_user.id %>
   <form action="/messages/<%=@message.id%>/delete" method="post">
-    <input type="hidden" name="_method" value="PUT">
     <button type="submit" class="btn btn-default">Delete Your Post</button>
   </form>
 <% else %>
