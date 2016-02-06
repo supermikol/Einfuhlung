@@ -79,7 +79,9 @@ end
 
 #reply in conversation
 post '/messages/private/:id' do
-  @new_message = Message.new(message: params[:text], parent_id: Message.find(params[:id]).last_child_id, sender_id: session[:user_id])
+
+  #icebox: implement security so that only participating users in thread can create new reply
+    @new_message = Message.new(message: params[:text], parent_id: Message.find(params[:id]).last_child_id, sender_id: session[:user_id])
 
 
   if @new_message.save
