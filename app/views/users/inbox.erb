@@ -17,7 +17,7 @@
                 <img class="media-object" data-src="holder.js/64x64" alt="64x64" style="width: 50px; height: 50px;" src="">
             </div>
             <div class="media-body">
-                <h5 class="media-heading"><%= message.sender.first_name %> <%= message.sender.last_name %>, <%= message.children_messages[0].sender.first_name %> <%= message.children_messages[0].sender.last_name %></h5>
+                <h5 class="media-heading"><%= message.sender.first_name %>, <%= message.children_messages[0].sender.first_name %> </h5>
                 <small><%= thread.last.message %></small>
             </div>
         </a>

@@ -2,7 +2,7 @@ class Message < ActiveRecord::Base
   # Remember to create a migration!
 
   validates :message, length: {
-    minimum: 3 }
+    minimum: 2 }
 
   belongs_to :sender, class_name: "User", foreign_key: :sender_id
 

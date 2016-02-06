@@ -45,8 +45,8 @@
           </button>
           <a class="navbar-brand" href="/">Speak</a>
         </div>
-          <% if current_user %>
         <div id="navbar" class="collapse navbar-collapse">
+          <% if current_user %>
           <ul class="nav navbar-nav">
             <li class="active"><a href="/">Home</a></li>
             <li><a href="/inbox">Inbox</a></li>
@@ -54,6 +54,11 @@
           <div class="navbar-form navbar-right">
             <a class="btn btn-default " href="/logout" role="button">Logout</a>
           </div>
+          <% else %>
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+          </ul>
           <% end %>
         </div><!--/.nav-collapse -->
       </div>
