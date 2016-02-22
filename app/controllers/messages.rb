@@ -19,9 +19,10 @@ end
 post '/test' do
   @parameters = params
   erb :test, layout: false
-  puts "********" * 30
+  puts "********beginning" * 30
   p params
-  puts "********" * 30
+  puts params
+  puts "********end" * 30
 end
 
 get '/test' do
