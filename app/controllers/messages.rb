@@ -16,6 +16,14 @@ post '/messages' do
   end
 end
 
+post '/test' do
+  @parameters = params
+  erb :test
+end
+
+get '/test' do
+end
+
 #Shows posting
 get '/messages/:id' do
   @message = Message.find(params[:id])
