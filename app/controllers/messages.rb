@@ -18,11 +18,11 @@ end
 
 post '/test' do
   @parameters = params
-  erb :test, layout: false
   puts "********beginning" * 30
   p params
-  puts params
+  puts @parameters
   puts "********end" * 30
+  erb :test, layout: false
 end
 
 get '/test' do
