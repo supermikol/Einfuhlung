@@ -18,7 +18,7 @@ end
 
 post '/test' do
   @parameters = params
-  erb :test
+  erb :test, layout: false
 end
 
 get '/test' do
